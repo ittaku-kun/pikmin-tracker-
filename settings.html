@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2d7a4f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>設定 - 素材収集トラッカー</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <button class="header-back" id="btnBack">← 戻る</button>
+    <div class="header-title">設定</div>
+    <div class="header-spacer"></div>
+  </header>
+
+  <!-- 設定フォーム -->
+  <main class="settings-main">
+
+    <!-- コンプリート目標個数 -->
+    <section class="card">
+      <div class="card-title">🎯 コンプリート目標個数</div>
+      <p class="setting-label">毎月公式サイトで確認して入力してください</p>
+      <div class="setting-input-row">
+        <input
+          class="setting-input"
+          id="inputCompleteGoal"
+          type="text"
+          inputmode="numeric"
+          placeholder="12000"
+        >
+        <span class="setting-unit">個</span>
+      </div>
+    </section>
+
+    <!-- 巨大キノコ開催日 -->
+    <section class="card">
+      <div class="card-title" id="calendarTitle">🍄 巨大キノコ開催日</div>
+      <p class="setting-label">公式サイトを確認してチェックしてください</p>
+      <a
+        class="btn-official"
+        href="https://pikminbloom.com/ja/news/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >公式サイトを開く 🔗</a>
+      <p class="setting-label setting-label-mt">チェックした日は巨大キノコ開催日（+600個/日）として計算されます</p>
+      <div id="calendar"></div>
+    </section>
+
+    <!-- 保存ボタン -->
+    <button class="btn-save" id="btnSave">保存する</button>
+
+  </main>
+
+  <!-- トースト通知 -->
+  <div class="toast" id="toast"></div>
+
+  <!-- スクリプト -->
+  <script src="storage.js"></script>
+  <script src="settings.js"></script>
+
+</body>
+</html>

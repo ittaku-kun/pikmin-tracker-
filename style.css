@@ -1,0 +1,553 @@
+/* 共通スタイル - ピクミンブルーム 素材収集トラッカー */
+
+/* リセット・基本設定 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #2d7a4f;
+  --color-primary-dark: #1a472a;
+  --color-primary-light: #4caf50;
+  --color-accent: #ff9800;
+  --color-accent-dark: #e65100;
+  --color-bg: #f5f9f5;
+  --color-card: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #666666;
+  --color-border: #d0e8d8;
+  --color-success: #2e7d32;
+  --color-danger: #c62828;
+  --color-chart-ideal: #1565c0;
+  --color-chart-current: #ff6f00;
+  --color-chart-predict: #c62828;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Noto Sans JP', 'Yu Gothic', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ヘッダー */
+.header {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  color: white;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.header-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-title .icon {
+  font-size: 1.3rem;
+}
+
+/* 設定ボタン */
+.btn-settings {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-settings:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* メインコンテンツ */
+.main {
+  padding: 8px 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* カード共通 */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+}
+
+.card-chart {
+  padding: 10px 12px 8px;
+}
+
+.card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 入力エリア */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.input-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.input-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-field {
+  width: 140px;
+  padding: 5px 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-align: right;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+}
+
+.input-unit {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  min-width: 20px;
+}
+
+.input-hint {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  font-weight: normal;
+  margin-left: 3px;
+}
+
+.btn-update {
+  width: 100%;
+  padding: 10px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-update:active {
+  background: var(--color-primary-dark);
+  transform: scale(0.98);
+}
+
+/* 進捗サマリー（縦並びリスト） */
+.info-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 3px 0;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.info-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.info-unit {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+.info-value.success { color: var(--color-success); }
+.info-value.danger  { color: var(--color-danger); }
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 4px 0;
+}
+
+/* 判定バッジ */
+.judgment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.judgment.success {
+  background: #e8f5e9;
+  color: var(--color-success);
+  border: 1px solid #a5d6a7;
+}
+
+.judgment.danger {
+  background: #ffebee;
+  color: var(--color-danger);
+  border: 1px solid #ef9a9a;
+}
+
+.judgment.complete {
+  background: #fff8e1;
+  color: #f57f17;
+  border: 1px solid #ffe082;
+}
+
+/* グラフエリア */
+.chart-container {
+  position: relative;
+  height: 200px;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 6px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.legend-line {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-line.ideal { background: var(--color-chart-ideal); }
+.legend-line.predict { background: var(--color-chart-predict); border-top: 2px dashed var(--color-chart-predict); background: transparent; height: 0; }
+.legend-star {
+  color: var(--color-chart-current);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* 初回案内 */
+.welcome-msg {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: 24px 0;
+}
+
+/* ヘッダー右側のスペーサー（左右対称にするため） */
+.header-spacer {
+  width: 60px;
+}
+
+/* 設定画面ヘッダー */
+.header-back {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header-back:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 設定フォーム */
+.settings-main {
+  padding: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setting-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.setting-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.setting-input {
+  flex: 1;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-align: right;
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-appearance: none;
+}
+
+.setting-input:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+}
+
+/* 設定画面の単位テキスト */
+.setting-unit {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* 設定ラベルの上マージンあり版 */
+.setting-label-mt {
+  margin-top: 10px;
+}
+
+/* 公式サイトリンク */
+.btn-official {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #1565c0;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-official:active {
+  background: #0d47a1;
+}
+
+/* カレンダー（巨大キノコ開催日） */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  padding: 2px 0;
+}
+
+.calendar-weekday.sun { color: #c62828; }
+.calendar-weekday.sat { color: #1565c0; }
+
+.calendar-day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-day input[type="checkbox"] {
+  display: none;
+}
+
+.calendar-day label {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.calendar-day input:checked + label {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent-dark);
+  font-weight: 700;
+}
+
+.calendar-day label.sun { color: #c62828; }
+.calendar-day label.sat { color: #1565c0; }
+.calendar-day input:checked + label.sun,
+.calendar-day input:checked + label.sat {
+  color: white;
+}
+
+.calendar-day.empty label {
+  background: transparent;
+  border-color: transparent;
+  pointer-events: none;
+}
+
+/* 保存ボタン */
+.btn-save {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-save:active {
+  background: var(--color-primary-dark);
+  transform: scale(0.98);
+}
+
+/* 保存完了トースト */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1a1a1a;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 日付入力フィールド */
+.input-date {
+  text-align: left;
+}
+
+/* フィールド下の警告・エラーテキスト（空のときは高さゼロ） */
+.field-warning,
+.field-error {
+  font-size: 0.78rem;
+  line-height: 1.2;
+  padding: 0 2px;
+}
+.field-warning:empty,
+.field-error:empty { display: none; }
+.field-warning { color: #e65100; }
+.field-error   { color: #c62828; }
+
+/* スマホ向け微調整 */
+@media (max-width: 360px) {
+  .calendar-day label {
+    font-size: 0.75rem;
+  }
+  .summary-value {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2d7a4f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="素材トラッカー">
+  <title>ピクミンブルーム 素材収集トラッカー</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-title">
+      <span class="icon">🍄</span>
+      素材収集トラッカー
+    </div>
+    <button class="btn-settings" onclick="location.href='settings.html'" title="設定">⚙️</button>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- 入力エリア -->
+    <section class="card">
+      <div class="card-title">📥 ゲーム画面から入力</div>
+      <div class="input-group">
+        <div class="input-row">
+          <label class="input-label" for="inputSimDate">確認日<span class="input-hint">（当月のみ）</span></label>
+          <span class="input-right">
+            <input
+              class="input-field input-date"
+              id="inputSimDate"
+              type="date"
+            >
+            <span class="input-unit" aria-hidden="true" style="visibility:hidden;">個</span>
+          </span>
+        </div>
+        <div class="field-warning" id="warnDate"></div>
+        <div class="input-row">
+          <label class="input-label" for="inputNextGoal">累計目標</label>
+          <span class="input-right">
+            <input
+              class="input-field"
+              id="inputNextGoal"
+              type="text"
+              inputmode="numeric"
+              placeholder="600"
+            >
+            <span class="input-unit">個</span>
+          </span>
+        </div>
+        <div class="input-row">
+          <label class="input-label" for="inputRemaining">あと</label>
+          <span class="input-right">
+            <input
+              class="input-field"
+              id="inputRemaining"
+              type="text"
+              inputmode="numeric"
+              placeholder="390"
+            >
+            <span class="input-unit">個</span>
+          </span>
+        </div>
+        <div class="field-error" id="errorInput"></div>
+        <button class="btn-update" id="btnUpdate">更新</button>
+      </div>
+    </section>
+
+    <!-- ウェルカムメッセージ（初回のみ） -->
+    <div class="welcome-msg" id="welcomeMsg">
+      <p>🌸 ゲーム画面の「次の目標個数」と「あと○○個」を<br>入力して「更新」を押してください</p>
+      <br>
+      <p style="font-size:0.8rem;">⚙️ 設定から目標個数・巨大キノコ開催日を<br>設定すると精度が上がります</p>
+    </div>
+
+    <!-- 進捗サマリー（入力後に表示） -->
+    <section class="card" id="summarySection" style="display:none;">
+      <div class="info-row">
+        <span class="info-label">現在の累計</span>
+        <span><span class="info-value" id="currentTotal">−</span><span class="info-unit">個</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">コンプリートまで</span>
+        <span><span class="info-value" id="remainingToComplete">−</span><span class="info-unit">個</span></span>
+      </div>
+
+      <hr class="summary-divider">
+
+      <div class="info-row">
+        <span class="info-label">残り日数</span>
+        <span><span class="info-value" id="remainingDays">−</span><span class="info-unit">日</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">必要ペース</span>
+        <span><span class="info-value" id="requiredPace">−</span><span class="info-unit">個/日</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">現在ペース</span>
+        <span><span class="info-value" id="currentPace">−</span><span class="info-unit">個/日</span></span>
+      </div>
+
+      <div class="judgment" id="judgment"></div>
+    </section>
+
+    <!-- グラフ -->
+    <section class="card card-chart" id="summarySection2" style="display:none;">
+      <div class="chart-container">
+        <canvas id="paceChart"></canvas>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item">
+          <div class="legend-line ideal"></div>
+          <span>目標ペース</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-star">★</span>
+          <span>現在地</span>
+        </div>
+        <div class="legend-item">
+          <svg width="20" height="8" style="flex-shrink:0;">
+            <line x1="0" y1="4" x2="20" y2="4" stroke="#c62828" stroke-width="2" stroke-dasharray="5,3"/>
+          </svg>
+          <span>現在ペース</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- バージョン表示 -->
+  <div style="text-align:center; padding: 12px 0 20px; font-size:0.72rem; color:#aaa;">v13</div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- アプリスクリプト -->
+  <script src="storage.js"></script>
+  <script src="chart-config.js"></script>
+  <script src="app.js"></script>
+
+
+</body>
+</html>
